@@ -7,6 +7,8 @@ from mysql_database_creator import MySqlDatabaseCreator
 from db_connect import DbConnect
 from subset_utils import print_progress
 import database_helper
+import argparse
+
 
 def db_creator(db_type, source, dest):
     if db_type == 'postgres':
@@ -18,8 +20,14 @@ def db_creator(db_type, source, dest):
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--config', help='Path to the config file')
+    args = parser.parse_args()
+
     if "--stdin" in sys.argv:
         config_reader.initialize(sys.stdin)
+    elif args.config:
+        config_reader.initialize(config_path=args.config)
     else:
         config_reader.initialize()
 

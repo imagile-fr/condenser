@@ -2,16 +2,19 @@ import json, sys, collections
 
 _config = None
 
-def initialize(file_like = None):
+def initialize(file_like = None ,config_path=None):
     global _config
     if _config != None:
         print('WARNING: Attempted to initialize configuration twice.', file=sys.stderr)
 
-    if not file_like:
+    if config_path:
+        with open(config_path, 'r') as fp:
+            _config = json.load(fp)
+    elif file_like:
+        _config = json.load(file_like)
+    else:
         with open('config.json', 'r') as fp:
             _config = json.load(fp)
-    else:
-        _config = json.load(file_like)
 
     if "desired_result" in _config:
         raise ValueError("desired_result is a key in the old config spec. Check the README.md and example-config.json for the latest configuration parameters.")

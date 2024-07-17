@@ -37,6 +37,8 @@ There may be more required configuration depending on your database, but simple 
 
 5. Run! `$ python direct_subset.py`
 
+
+
 # Config
 
 Configuration must exist in `config.json`. There is an example configuration provided in `example-config.json`. Most of the configuration is straightforward: source and destination DB connection details and subsetting settings. There are three fields that desire some additional attention.
@@ -83,7 +85,9 @@ Almost all the configuration is in the `config.json` file, so running is as simp
 $ python direct_subset.py
 ```
 
-Two commandline arguements are supported:
+Two commandline arguments are supported:
+
+`--config`: Specify a different config file. The default is `config.json`.
 
 `-v`: Verbose output. Useful for performance debugging. Lists almost every query made, and it's speed.
 
